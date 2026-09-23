@@ -1,11 +1,18 @@
-from pydantic_settings import BaseSettings, SettingsConfigDict
+import os
+from dotenv import load_dotenv
 
-class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
+load_dotenv()
 
-    openai_api_key: str = ""
-    openai_base_url: str = "https://api.openai.com/v1"
-    model: str = "gpt-4o-mini"
-    max_steps: int = 8
+class Settings:
+    LLM_API_KEY: str = os.getenv("LLM_API_KEY", "")
+    LLM_BASE_URL: str = os.getenv("LLM_BASE_URL", "https://api.deepseek.com/v1")
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "deepseek-chat")
+    TEMPERATURE: float = 0.0          # 客服场景要稳定
+    MAX_HISTORY_TURNS: int = 10       # 最多保留最近10轮对话
+
+    def validate(self):
+        if not self.LLM_API_KEY:
+            raise ValueError("请在 .env 中配置 LLM_API_KEY")
 
 settings = Settings()
+settings.validate()

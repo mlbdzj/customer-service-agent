@@ -1,21 +1,11 @@
 [project]
-name = "customer-service-agent"
+name = "single-agent-cs"
 version = "0.1.0"
-description = "基于 LangGraph 的企业级客服 Agent"
+description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "mlbdzj", email = "2913152545@qq.com" }
-]
 requires-python = ">=3.12"
 dependencies = [
-    "fastapi[standard]>=0.141.1",
-    "openai>=3.17.0",
-    "pydantic-settings>=2.15.0",
+    "langchain>=1.4.2",
+    "langchain-openai>=1.6.4",
+    "python-dotenv>=1.2.3",
 ]
-
-[project.scripts]
-customer-service-agent = "customer_service_agent:main"
-
-[build-system]
-requires = ["uv_build>=0.12.17,<0.13.0"]
-build-backend = "uv_build"
